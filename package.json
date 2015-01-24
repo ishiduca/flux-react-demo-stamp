@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "flux": "^2.0.1",
+    "react": "^0.12.2"
+  },
+  "devDependencies": {
+    "reactify": "^1.0.0"
+  },
+  "scripts": {
+    "build-js": "browserify -t reactify app/main.js -o js/bundle.js"
+  }
+}
