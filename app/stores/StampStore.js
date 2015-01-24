@@ -8,8 +8,9 @@ function Store () {
 }
 util.inherits(Store, events.EventEmitter)
 
-Store.prototype.ADD_STAMP = function (value) {
+Store.prototype.add_stamp = function (value) {
     this.list.push(value)
+    this.emitChange()
     return this
 }
 
@@ -29,10 +30,9 @@ Store.prototype.getlist = function () {
 var store = module.exports = new Store
 
 Disptcher.register(function (payload) {
-    var actionType = payload.actionType
+    var actionType = payload.actionType.toLowerCase()
 
-    if (actionType === 'ADD_STAMP') {
-        store.ADD_STAMP(payload.value)
-        store.emitChange()
+    if (typeof store[actionType] === 'function') {
+        store[actionType](payload.value)
     }
 })
